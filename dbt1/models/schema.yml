@@ -1,0 +1,70 @@
+version: 2
+
+models:
+      - name: stg_market_data
+        description: "Staging table with cleaned data, prepared from raw market_data for downstream analytics."
+        columns:
+          - name: symbol
+            description: "Cleaned stock symbol."
+            data_tests:
+              - not_null
+          - name: date
+            description: "Date of the stock price data."
+            data_tests:
+              - not_null
+          - name: close_price
+            description: "Cleaned Closing price."
+            data_tests:
+              - not_null  
+     
+      - name: bollinger_bands
+        description: "Table storing Bollinger Bands calculations."
+        columns:
+          - name: symbol
+            description: "Stock symbol."
+          - name: date
+            description: "Date of stock price data."
+          - name: upper_band
+            description: "Upper Bollinger Band."
+            data_tests:
+              - not_null
+          - name: lower_band
+            description: "Lower Bollinger Band."
+            data_tests:
+              - not_null
+
+      - name: rsi_calculations
+        description: "Table storing RSI (Relative Strength Index) calculations."
+        columns:
+          - name: symbol
+            description: "Stock symbol."
+          - name: date
+            description: "Date of stock price data."
+          - name: rsi
+            description: "Calculated RSI value."
+            data_tests:
+              - not_null
+
+      - name: moving_averages
+        description: "Table storing 50-day and 200-day moving averages."
+        columns:
+          - name: symbol
+            description: "Stock symbol."
+          - name: date
+            description: "Date of stock price data."
+          - name: moving_avg_7d
+            description: "7-day moving average."
+          - name: moving_avg_30d
+            description: "30-day moving average."
+            data_tests:
+              - not_null
+
+      - name: volatility_measures
+        description: "Table storing volatility measures."
+        columns:
+          - name: symbol
+            description: "Stock symbol."
+          - name: date
+            description: "Date of stock price data."
+          - name: volatility_30d
+            description: "Calculated volatility measure."

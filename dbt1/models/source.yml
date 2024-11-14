@@ -1,0 +1,74 @@
+version: 2
+
+sources:
+  - name: stocks
+    database: stock
+    schema: stocks
+    tables:
+      - name: market_data
+        description: "Raw stock market data for Microsoft and Meta, populated via ETL DAG."
+        columns:
+          - name: symbol
+            description: "Stock symbol (e.g., MSFT for Microsoft and META for Meta)"
+          - name: date
+            description: "Date of the stock price data."
+          - name: close
+            description: "Closing price of the stock."
+
+  - name: analytics
+    database: stock
+    schema: analytics
+    tables:
+      - name: stg_market_data
+        description: "Staging table with cleaned data, prepared from raw market_data for downstream analytics."
+        columns:
+          - name: symbol
+            description: "Cleaned stock symbol."
+          - name: date
+            description: "Date of the stock price data."
+          - name: close_price
+            description: "Cleaned Closing price."
+     
+      - name: bollinger_bands
+        description: "Table storing Bollinger Bands calculations."
+        columns:
+          - name: symbol
+            description: "Stock symbol."
+          - name: date
+            description: "Date of stock price data."
+          - name: bollinger_upper
+            description: "Upper Bollinger Band."
+          - name: bollinger_lower
+            description: "Lower Bollinger Band."
+
+      - name: rsi_calculations
+        description: "Table storing RSI (Relative Strength Index) calculations."
+        columns:
+          - name: symbol
+            description: "Stock symbol."
+          - name: date
+            description: "Date of stock price data."
+          - name: rsi
+            description: "Calculated RSI value."
+
+      - name: moving_averages
+        description: "Table storing 50-day and 200-day moving averages."
+        columns:
+          - name: symbol
+            description: "Stock symbol."
+          - name: date
+            description: "Date of stock price data."
+          - name: moving_average_50
+            description: "50-day moving average."
+          - name: moving_average_200
+            description: "200-day moving average."
+
+      - name: volatility_measures
+        description: "Table storing volatility measures."
+        columns:
+          - name: symbol
+            description: "Stock symbol."
+          - name: date
+            description: "Date of stock price data."
+          - name: volatility
+            description: "Calculated volatility measure."
